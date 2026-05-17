@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 48" width="380" height="48">
+  <text x="0" y="34" font-family="sans-serif" font-weight="700" font-size="28" fill="#ffffff">PrismaMate</text>
+  <text x="176" y="34" font-family="sans-serif" font-weight="400" font-size="18" fill="#D1D5DB" letter-spacing="2">棱镜报告</text>
+  <rect x="257" y="15" width="44" height="22" rx="4" fill="rgba(255,255,255,0.1)"/>
+  <text x="279" y="31" font-family="sans-serif" font-weight="600" font-size="11" fill="rgba(255,255,255,0.6)" text-anchor="middle">Beta</text>
+</svg>

@@ -1,0 +1,89 @@
+{
+  "test_date": "2026-05-14T03:05:04.990937",
+  "platform": "DeepSeek",
+  "platform_url": "https://chat.deepseek.com",
+  "test_keyword": "人工智能发展趋势",
+  "total_attempts": 5,
+  "success_count": 0,
+  "failure_count": 5,
+  "success_rate": "0%",
+  "selectors_config": {
+    "input": [
+      "div._24fad49 textarea",
+      "[class*='_24fad49'] textarea",
+      "textarea"
+    ],
+    "submit": [
+      "div.ds-icon svg",
+      "[class*='ec4f5d61'] svg",
+      "[class*='bf38813a'] svg",
+      "button[type='submit']",
+      "svg"
+    ],
+    "response": [
+      "[data-testid='assistant-message']",
+      ".ds-markdown",
+      "[class*='ds-message']",
+      "div.ds-message"
+    ]
+  },
+  "error_summary": {
+    "captcha_count": 0,
+    "timeout_count": 0,
+    "selector_failures": 5
+  },
+  "results": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "response_time": 17.3,
+      "has_citations": false,
+      "response_length": 0,
+      "selectors_used": {},
+      "error": "输入框选择器全部失效",
+      "error_type": "selector_not_found"
+    },
+    {
+      "attempt": 2,
+      "status": "failed",
+      "response_time": 15.41,
+      "has_citations": false,
+      "response_length": 0,
+      "selectors_used": {},
+      "error": "输入框选择器全部失效",
+      "error_type": "selector_not_found"
+    },
+    {
+      "attempt": 3,
+      "status": "failed",
+      "response_time": 15.45,
+      "has_citations": false,
+      "response_length": 0,
+      "selectors_used": {},
+      "error": "输入框选择器全部失效",
+      "error_type": "selector_not_found"
+    },
+    {
+      "attempt": 4,
+      "status": "failed",
+      "response_time": 15.39,
+      "has_citations": false,
+      "response_length": 0,
+      "selectors_used": {},
+      "error": "输入框选择器全部失效",
+      "error_type": "selector_not_found"
+    },
+    {
+      "attempt": 5,
+      "status": "failed",
+      "response_time": 15.4,
+      "has_citations": false,
+      "response_length": 0,
+      "selectors_used": {},
+      "error": "输入框选择器全部失效",
+      "error_type": "selector_not_found"
+    }
+  ],
+  "recommendation": "强烈建议优先使用官方 API，Playwright 作为备选方案",
+  "conclusion": "FAIL"
+}

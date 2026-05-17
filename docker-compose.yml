@@ -1,0 +1,58 @@
+# ============================================================
+# PrismaMate 棱镜 - Docker Compose 配置
+# ============================================================
+# 用于快速部署完整的前后端服务
+# ============================================================
+# 用法: docker-compose up -d
+# ============================================================
+
+version: '3.8'
+
+services:
+  # 后端服务
+  backend:
+    build:
+      context: ./prismamate-backend
+      dockerfile: Dockerfile
+    container_name: prismamate-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - KIMI_API_KEY=${KIMI_API_KEY}
+      - SECRET_KEY=${SECRET_KEY:-change-this-in-production}
+      - CORS_ORIGINS=http://localhost:3000,http://frontend:80
+      - DEBUG=false
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - prismamate-network
+
+  # 前端服务
+  frontend:
+    build:
+      context: ./prismamate-frontend
+      dockerfile: Dockerfile
+    container_name: prismamate-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+    networks:
+      - prismamate-network
+
+networks:
+  prismamate-network:
+    driver: bridge

@@ -1,0 +1,134 @@
+version: '3.8'
+
+services:
+  # Nginx 反向代理
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - prismamate
+
+  # Vue 3 前端
+  frontend:
+    build:
+      context: ./prismamate-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./prismamate-frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_BASE_URL=http://backend:8000/api/v1
+    networks:
+      - prismamate
+    depends_on:
+      - backend
+
+  # FastAPI 后端
+  backend:
+    build:
+      context: ./prismamate-backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./prismamate-backend:/app
+    environment:
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=prismamate
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres123
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DEBUG=true
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - prismamate
+
+  # Celery Worker
+  celery_worker:
+    build:
+      context: ./prismamate-backend
+      dockerfile: Dockerfile
+    command: celery -A app.celery_app worker --loglevel=info --concurrency=4
+    volumes:
+      - ./prismamate-backend:/app
+    environment:
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=prismamate
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres123
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - prismamate
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+
+  # Celery Beat (定时任务调度器)
+  celery_beat:
+    build:
+      context: ./prismamate-backend
+      dockerfile: Dockerfile
+    command: celery -A app.celery_app beat --loglevel=info
+    volumes:
+      - ./prismamate-backend:/app
+    environment:
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=prismamate
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres123
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - prismamate
+
+  # PostgreSQL 数据库
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=prismamate
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - prismamate
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - prismamate
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  prismamate:
+    driver: bridge

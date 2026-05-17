@@ -1,0 +1,49 @@
+{
+  "test_date": "2026-05-14T03:19:18.542925",
+  "platform": "DeepSeek API",
+  "api_endpoint": "https://api.deepseek.com/v1/chat/completions",
+  "tests": [
+    {
+      "name": "api_key_load",
+      "status": "PASS",
+      "detail": "Key: sk-682d2...8362"
+    },
+    {
+      "name": "api_connectivity",
+      "status": "PASS",
+      "response_time": 0.9097590446472168,
+      "tokens_used": 32
+    },
+    {
+      "name": "brand_extraction",
+      "status": "PASS",
+      "mentions_count": 7,
+      "brands_found": [
+        "阿里巴巴",
+        "华为",
+        "腾讯"
+      ],
+      "response": "华为、阿里巴巴和腾讯是中国科技行业的三大巨头，业务覆盖广泛且各具特色。以下是它们的主要业务介绍：\n\n### 1. 华为\n- **核心业务**：通信设备、消费电子、企业级IT解决方案、云计算、人工智能。\n- **具体领域**：\n  - **通信设备**：全球领先的5G、4G基站、光网络、路由器等电信基础设施供应商。\n  - **消费者业务**：智能手机（如Mate、P系列）、平板、笔记本电脑、智能穿戴设备（如手表、耳机）。\n  - **企业业务**：提供数据中心、云计算服务（华为云）、物联网、工业互联网解决方案。\n  - **智能汽车解决方案**：为车企提供自动驾驶、智能座舱、车联网技术（如华为HiCar）。\n- **特点**：技术驱动型，研发投入极高，尤其在芯片（麒麟系列）和通信标准方面有深厚积累。\n\n### 2. 阿里巴巴\n- **核心业务**：电商、云计算、数字媒体与娱乐、金融科技、本地生活服务。\n- **具体领域**：\n  - **电商平台**：淘宝（C2C）、天猫（B2C）、1688（B2B）、速卖通（跨境）、Lazada（东南亚）。\n  - **云计算**：阿里云（中国最大、..."
+    },
+    {
+      "name": "citation_extraction",
+      "status": "PASS",
+      "citations_count": 0,
+      "citations": []
+    },
+    {
+      "name": "stability_test",
+      "status": "PASS",
+      "times": [
+        5.076217889785767,
+        6.566572666168213,
+        8.507337093353271
+      ],
+      "avg_time": 6.71670921643575
+    }
+  ],
+  "summary": {
+    "overall": "PASS",
+    "recommendation": "DeepSeek API 完全可用，优先采用 API 模式实现适配器"
+  }
+}

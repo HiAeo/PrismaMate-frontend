@@ -1,0 +1,54 @@
+# Python venv
+prismamate-backend/venv/
+prismamate-frontend/node_modules/
+prismamate-frontend/.vite/
+node_modules/
+prismamate-frontend/dist/
+__pycache__/
+prismamate-backend/__pycache__/
+prismamate-backend/data/
+.pytest_cache/
+prismamate-backend/debug_out.txt
+prismamate-backend/debug_api.py
+prismamate-backend/debug_api2.py
+prismamate-backend/debug_server.py
+prismamate-backend/test_api.py
+
+# Backup files
+*.zip
+*backup*.zip
+*_backup*.zip
+
+# Environment
+.env
+.env.*
+*.env
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Credentials
+API\ KEY.txt
